@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace TheFinalBattle
 {
-    public class Player
+    public abstract class Player
     {
-        private readonly Random _random = new();
+        public Random _random = new();
         public List<Character>? Enemies { get; private set; }
-        private Character? _enemy;
+        public Character? Enemy { get; set; }
         public virtual Action GetAction(Character character)
         {
             return character switch
@@ -23,13 +23,8 @@ namespace TheFinalBattle
             };
         }
 
-        public static string UserInput()
-        {
-            Console.Write("Enter the True programmers name: ");
-            string input = Console.ReadLine()!;
-            return input;
-        }
-        public void PlayerTurn(List<Character> characters, List<Character> enemies)
+        
+        public void PlayTurn(List<Character> characters, List<Character> enemies)
         {
             Enemies = enemies;
             if(characters.Count != 0 & enemies.Count != 0)
@@ -39,16 +34,16 @@ namespace TheFinalBattle
                     if (character.Health != 0)
                     {
                         Console.WriteLine($"It is {character}'s turn... ");
-                        _enemy = GetEnemy();
+                        Enemy = GetEnemy();
                         character.Action = GetAction(character);
-                        character.Action.Run(character, _enemy);
+                        character.Action.Run(character, Enemy);
 
-                        _enemy.IsAlive = _enemy.Health == 0 ? false : true;
-                        if (_enemy.IsAlive == false)
+                        Enemy.IsAlive = Enemy.Health == 0 ? false : true;
+                        if (Enemy.IsAlive == false)
                         {
-                            Console.WriteLine($"{_enemy} DIED!!");
+                            Console.WriteLine($"{Enemy} DIED!!");
                             Thread.Sleep(1500);
-                            enemies.Remove(_enemy);
+                            enemies.Remove(Enemy);
                             if (enemies.Count == 0)
                                 break;
                         }
@@ -57,7 +52,13 @@ namespace TheFinalBattle
                 }
             }
         }
-        public virtual Character GetEnemy() => _enemy = Enemies[_random.Next(Enemies.Count)];
+        public abstract Character GetEnemy();
+        public abstract string GetUserInput();
+        public string NameTheTrueProgrammer()
+        {
+            Console.Write($"Insert a name for TheTrueProgrammer: ");
+            return GetUserInput();
+        }
 
     }
 }

@@ -13,9 +13,9 @@ namespace TheFinalBattle
             Console.WriteLine($"1 - Standard Attack ({character.StandardAttack.SkillName})");
             Console.WriteLine($"2 - Do Nothing ");
             Console.Write("What do you want to do? ");
-            string userInput = Console.ReadLine()!;
+            char userInput = Convert.ToChar(GetUserInput());
             Console.WriteLine();
-            if(userInput == "1")
+            if(userInput == '1')
             {
                 return character switch
                 {
@@ -40,12 +40,17 @@ namespace TheFinalBattle
                 count++;
             }
             Console.Write("\nPick one enemy: ");
-            int value = Convert.ToInt32(Console.ReadLine());
+            char value = Convert.ToChar(GetUserInput());
             if (value >= Enemies.Count)
                 return Enemies[0];
             else
                 return Enemies[value];
                 
+        }
+        public override string GetUserInput()
+        {
+            string input = Console.ReadLine()!;
+            return input;
         }
     }
 }

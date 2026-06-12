@@ -15,7 +15,7 @@ class Game
     public Game()
     {
         ChooseGameMode();
-        _heroesParty = new() { new TheTrueProgrammer(Player.UserInput()), new VinFletcher() };
+        _heroesParty = new() { new TheTrueProgrammer(player1.NameTheTrueProgrammer()), new VinFletcher() };
         _monsterParty1 = new() { new Skeleton() };
         _monsterParty2 = new() { new Skeleton(), new Skeleton() };
         _monsterParty3 = new() { new Skeleton(), new Skeleton(), new VinFletcher() };

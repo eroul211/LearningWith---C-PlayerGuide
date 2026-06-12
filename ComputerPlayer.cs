@@ -12,6 +12,12 @@ namespace TheFinalBattle
         {
 
         }
-    }
 
+        public override string GetUserInput()
+        {
+            string userInput = Console.ReadLine()!;
+            return userInput;
+        }
+        public override Character GetEnemy() => Enemy = Enemies[_random.Next(Enemies.Count)];
+    }
 }

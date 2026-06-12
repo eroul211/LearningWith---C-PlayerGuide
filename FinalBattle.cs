@@ -23,11 +23,11 @@ class FinalBattle
         _currentPlayer = _player1;
         while (true)
         {
-            BattleStatus();
+            PrintBattleStatus();
             if(_currentPlayer == _player1)
-                _currentPlayer.PlayerTurn(_heroes, _monsters);
+                _currentPlayer.PlayTurn(_heroes, _monsters);
             else
-                _currentPlayer.PlayerTurn(_monsters, _heroes);
+                _currentPlayer.PlayTurn(_monsters, _heroes);
 
             Console.Clear();
             _currentPlayer = _currentPlayer == _player1 ? _player2 : _player1;
@@ -41,7 +41,7 @@ class FinalBattle
     {
         return _heroes.Count != 0 ? true : false;
     }
-    private void BattleStatus()
+    private void PrintBattleStatus()
     {
         Console.WriteLine("============================================= BATTLE ============================================");
         foreach (Character hero in _heroes)
